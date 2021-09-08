@@ -17,11 +17,25 @@
     {{
       "application.scss.css" | asset_url | stylesheet_tag
     }}
+    <!-- Common Script -->
     {{
-      "application.js" | asset_url | script_tag
+      "shopify-app.js" | asset_url | script_tag
     }}
+    <!-- Product Script -->
+    {% if template == "product" %}
+    {{
+      "product.js" | asset_url | script_tag
+    }}
+    {% endif %}
+    <!-- Cart Script -->
+    {% if template == "cart" %}
+    {{
+      "cart-page.js" | asset_url | script_tag
+    }}
+    {% endif %}
   </head>
   <body>
+    <h1>Current template : {{ template }}</h1>
     {% for link in linklists.main-menu.links %} {% assign child_list_handle =
     link.title | handleize %} {% if linklists[child_list_handle].links != blank
     %}
@@ -32,7 +46,7 @@
     <a href="{{ link.url }}">{{ link.title }}</a>
     {% endif %} {% endfor %}
 
-    <a href="/cart">cart!</a>
+    <a href="/cart">cart</a>
 
     {% if shop.customer_accounts_enabled %} {% if customer %}
     <a href="/account">account</a>
