@@ -1,6 +1,52 @@
 {
-  "current": "Default",
+  "current": {
+    "sections": {
+      "163118960167bb55f3": {
+        "type": "news-carousel",
+        "blocks": {
+          "cf49fc1a-2769-4143-9b7f-55d4025b8805": {
+            "type": "content",
+            "settings": {
+              "block_type": "campaign",
+              "heading": "Flagship Campaign",
+              "subheading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique erat at risus vehicula, nec tristique tellus faucibus. Sed lorem neque, mattis ut placerat id, tristique id justo. Etiam rutrum semper fringilla. Pellentesque condimentum ultrices enim. Praesent sagittis et elit vel feugiat. Proin et blandit tellus. Proin placerat mollis lacinia. Curabitur non eros vitae erat auctor tempor at at ex. Ut risus turpis, semper ut venenatis nec, iaculis ut nibh. Vivamus tempus non tellus vel tincidunt.",
+              "featured": false
+            }
+          },
+          "3a8d1ec7-12f1-4471-a9db-12f28aa260b8": {
+            "type": "content",
+            "settings": {
+              "block_type": "new-product",
+              "heading": "Flagship Product",
+              "subheading": "Donec sit amet sollicitudin dolor. Mauris lacus ipsum, sagittis id lorem non, ornare ornare nibh. Quisque lobortis lobortis nunc, eget malesuada neque egestas at. Duis pretium feugiat pulvinar. Nulla mi felis, faucibus et malesuada a, consequat quis nunc. Quisque suscipit rutrum sapien, vitae iaculis nulla aliquam sit amet. Curabitur interdum ipsum tortor, sed dapibus felis ultrices finibus. Cras magna est, suscipit in neque nec, tempor pulvinar libero.",
+              "featured": true
+            }
+          },
+          "da47db89-bcc4-4e07-85ce-82ae1645801c": {
+            "type": "content",
+            "settings": {
+              "block_type": "news",
+              "heading": "Flagship News",
+              "subheading": "Cras viverra, eros sit amet ullamcorper sodales, nulla leo pretium diam, sit amet placerat diam elit ut velit. Duis ut interdum diam. Morbi lobortis non ante id euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed magna eros. Pellentesque commodo mauris a enim lobortis cursus. Proin lobortis odio ac cursus ullamcorper. Integer faucibus, tortor et interdum varius, leo metus placerat mi, sed vulputate turpis tortor et ante.",
+              "featured": false
+            }
+          }
+        },
+        "block_order": [
+          "cf49fc1a-2769-4143-9b7f-55d4025b8805",
+          "3a8d1ec7-12f1-4471-a9db-12f28aa260b8",
+          "da47db89-bcc4-4e07-85ce-82ae1645801c"
+        ],
+        "settings": {
+          "news-carousel": false
+        }
+      }
+    },
+    "content_for_index": [
+      "163118960167bb55f3"
+    ]
+  },
   "presets": {
-    "Default": { }
+    "Default": {}
   }
 }
