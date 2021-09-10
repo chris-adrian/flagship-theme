@@ -13,32 +13,34 @@ window.onload = () => {
       inputAvailability(noteArea, false);
     }
   });
-  // Auto Save notes after (5) seconds after input
-  var i = 0;
-  noteCounter = document.getElementById("note-counter");
-  var interval = null;
-  noteArea.addEventListener("input", (e) => {
-    console.log(interval);
-    if (interval == null) {
-      interval = setInterval(function () {
-        if (i == 5 || noteArea.value.length == 0) {
-          clearInterval(interval);
-          interval = null;
-          saveCartNotes(noteArea.value);
-        }
-        noteCounter.innerHTML = i;
-        i++;
-      }, 1000);
-    } else {
-      i = 0;
+  // Set Input - Submit
+  var inputs = document.getElementsByTagName("input");
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].type.toLowerCase() == "submit") {
+      let elem = inputs[i];
+      elem.addEventListener("click", (e) => {
+        removeAttrib(inputs, "clicked");
+        elem.setAttribute("clicked", true);
+      });
     }
-  });
+  }
   // Save notes on update / checkout
   const cartForm = document.getElementById("CartCheckoutForm");
+  let prevent = true;
   cartForm.addEventListener("submit", (e) => {
-    noteArea.value.length != 0 && saveCartNotes(noteArea.value);
+    if (prevent) {
+      e.preventDefault();
+      prevent = false;
+      saveCartNotes(noteArea.value, true);
+    }
   });
 };
+
+function removeAttrib(elem, attrib) {
+  for (let i = 0; i < elem.length; i++) {
+    elem[i].removeAttribute(attrib);
+  }
+}
 
 // Set Cart Order Notes Field
 function initCartNotes(button, area) {
@@ -53,7 +55,7 @@ function initCartNotes(button, area) {
     });
 }
 
-function saveCartNotes(message) {
+function saveCartNotes(message, resubmit) {
   let item = {
     note: message,
   };
@@ -68,6 +70,11 @@ function saveCartNotes(message) {
     .then((response) => response.json())
     .then((data) => {
       console.log("Success:", data);
+      if (resubmit) {
+        document
+          .querySelectorAll("input[type=submit][clicked=true]")[0]
+          .click();
+      }
     })
     .catch((error) => {
       console.error("Error:", error);

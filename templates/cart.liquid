@@ -49,7 +49,6 @@
     <tfoot>
       <tr>
         <td>
-          <span>(<b id="note-counter"></b>)</span>
           <label for="cart-order-notes">Add instructions : </label>
           <input type="checkbox" name="cart-order-notes" id="CrtNtsBtn" />
         </td>
@@ -59,8 +58,8 @@
   </table>
   <div>
     <p>sub total : {{ cart.total_price | money }}</p>
-    <button type="submit" name="update">Update</button>
-    <button type="submit" name="checkout">Checkout</button>
+    <input type="submit" name="update" value="Update" />
+    <input type="submit" name="checkout" value="Checkout" />
   </div>
 </form>
 {% else %}
