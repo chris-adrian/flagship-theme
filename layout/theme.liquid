@@ -33,6 +33,9 @@
       "cart-page.js" | asset_url | script_tag
     }}
     {% endif %}
+    {{
+      "application.js" | asset_url | script_tag
+    }}
   </head>
   <body>
     {% for link in linklists.main-menu.links %} {% assign child_list_handle =
