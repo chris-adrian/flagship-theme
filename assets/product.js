@@ -5,31 +5,110 @@ window.onload = () => {
     e.preventDefault();
     pushToCart();
   });
-
   // EVENT - Variant Selector
   const prdVariant = document.getElementById("productSelect");
   const prdCartBtn = document.getElementById("AddToCart");
-  // Init Button
+  // Init Button & modal QTY
   setPrdCartBtn(prdVariant, prdCartBtn);
   prdVariant.addEventListener("change", (e) => {
     setPrdCartBtn(prdVariant, prdCartBtn);
   });
+  // Init Cart Modal
+  fetchCart();
+  // Modal Events
+  modalEvents();
 };
 
-// Set Add to Cart Button
-function setPrdCartBtn(select, btn) {
-  select.options[select.selectedIndex].getAttribute("data-quantity") <= 0
-    ? inputAvailability(btn, true)
-    : inputAvailability(btn, false);
+// Show Cart Modal
+function showCartModal() {
+  const cartModal = document.querySelectorAll("section.modal");
+  for (let x = 0; x < cartModal.length; x++) {
+    cartModal[x].classList.remove("hidden");
+    cartModal[x].classList.add("active");
+  }
 }
 
-// AJAX - fetch cart
+// Toggle Modal
+function toggleModal(ele, close = false) {
+  if (close) {
+    const modal = findAncestor(ele, "modal");
+    modal.classList.remove("active");
+  } else {
+    ele.classList.toggle("active");
+  }
+}
+
+// Set Add to Cart Button and Modal stock QTY
+function setPrdCartBtn(select, btn) {
+  const qty =
+    select.options[select.selectedIndex].getAttribute("data-quantity");
+  const modal = document.getElementById("m-prdQty");
+  if (modal) modal.innerHTML = qty;
+  qty <= 0 ? inputAvailability(btn, true) : inputAvailability(btn, false);
+}
+
+// Fetch cart data
 function fetchCart() {
   var cartData = fetch("/cart.js")
     .then((response) => response.json())
     .then((data) => {
-      return data;
+      // return data;
+      initCartModal(data);
     });
+}
+
+// Set Cart Modal
+function initCartModal(data) {
+  const mItems = document.getElementById("m-cart-items");
+  const mQty = document.getElementById("m-cart-qty");
+  const mTotal = document.getElementById("m-cart-total");
+  //Set Modal items
+  mItems.innerHTML = ""; // Clear previous contents
+  for (let i = 0; i < data.items.length; i++) {
+    let item = data.items[i];
+    mItems.innerHTML += `<li data-cart-index="${
+      item.properties.cart_index
+    }"><a href="${item.url}"><img src="${
+      item.image
+    }" class="m-cart-img" /><span>${item.title}</span> <span>${priceFormat(
+      item.price,
+      2,
+      2,
+      "jp-JP",
+      "YEN"
+    )} x ${item.quantity}</a></li>`;
+  }
+  // Set Modal Quantity
+  mQty.innerHTML = data.item_count;
+  // Set Modal Total Price
+  mTotal.innerHTML = priceFormat(data.total_price, 2, 2, "jp-JP", "YEN");
+  // Display Modal
+  showCartModal();
+}
+
+// Modal Events
+function modalEvents() {
+  const sect = document.getElementsByTagName("section");
+  [...sect].forEach((ele) => {
+    for (let x = 0; x < ele.classList.length; x++) {
+      if (ele.classList[x] == "modal" && ele.classList[x] != "active") {
+        ele.addEventListener(
+          "webkitTransitionEnd",
+          () => {
+            !matchClass(ele, "active") && toggleElemDisp(ele, false);
+          },
+          false
+        );
+        ele.addEventListener(
+          "transitionend",
+          () => {
+            !matchClass(ele, "active") && toggleElemDisp(ele, false);
+          },
+          false
+        );
+      }
+    }
+  });
 }
 
 // AJAX - Product to cart
@@ -62,7 +141,8 @@ function pushToCart() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Success:", data);
+          // console.log("Success:", data);
+          fetchCart();
         })
         .catch((error) => {
           console.error("Error:", error);
