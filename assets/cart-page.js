@@ -1,39 +1,42 @@
 window.onload = () => {
-  // Event Notes
+  const cartForm = document.getElementById("CartCheckoutForm");
   const noteBtn = document.getElementById("CrtNtsBtn");
   const noteArea = document.getElementById("CrtNtsArea");
-  // Init Notes
-  initCartNotes(noteBtn, noteArea);
-  noteBtn.addEventListener("change", (e) => {
-    if (!noteBtn.checked) {
-      noteArea.value = "";
-      saveCartNotes("");
-      inputAvailability(noteArea, true);
-    } else {
-      inputAvailability(noteArea, false);
-    }
-  });
-  // Set Input - Submit
   var inputs = document.getElementsByTagName("input");
-  for (var i = 0; i < inputs.length; i++) {
-    if (inputs[i].type.toLowerCase() == "submit") {
-      let elem = inputs[i];
-      elem.addEventListener("click", (e) => {
-        removeAttrib(inputs, "clicked");
-        elem.setAttribute("clicked", true);
-      });
+
+  // If Cart Exist
+  if (cartForm) {
+    // Init Notes
+    initCartNotes(noteBtn, noteArea);
+    noteBtn.addEventListener("change", (e) => {
+      if (!noteBtn.checked) {
+        noteArea.value = "";
+        saveCartNotes("");
+        inputAvailability(noteArea, true);
+      } else {
+        inputAvailability(noteArea, false);
+      }
+    });
+    // Set Input Clicked on Submit
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].type.toLowerCase() == "submit") {
+        let elem = inputs[i];
+        elem.addEventListener("click", (e) => {
+          removeAttrib(inputs, "clicked");
+          elem.setAttribute("clicked", true);
+        });
+      }
     }
+    // Save notes on update / checkout
+    let prevent = true;
+    cartForm.addEventListener("submit", (e) => {
+      if (prevent) {
+        e.preventDefault();
+        prevent = false;
+        saveCartNotes(noteArea.value, true);
+      }
+    });
   }
-  // Save notes on update / checkout
-  const cartForm = document.getElementById("CartCheckoutForm");
-  let prevent = true;
-  cartForm.addEventListener("submit", (e) => {
-    if (prevent) {
-      e.preventDefault();
-      prevent = false;
-      saveCartNotes(noteArea.value, true);
-    }
-  });
 };
 
 function removeAttrib(elem, attrib) {
@@ -69,7 +72,7 @@ function saveCartNotes(message, resubmit) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("Success:", data);
+      // console.log("Success:", data);
       if (resubmit) {
         document
           .querySelectorAll("input[type=submit][clicked=true]")[0]

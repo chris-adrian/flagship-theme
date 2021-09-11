@@ -43,11 +43,11 @@
     <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
     {% endfor %}] {% else %}
     <a href="{{ link.url }}">{{ link.title }}</a>
-    {% endif %} {% endfor %}
-
+    {% endif %} {% endfor %} {% if template == 'product' %}
+    <a onclick="showCartModal()">cart</a>
+    {% else %}
     <a href="/cart">cart</a>
-
-    {% if shop.customer_accounts_enabled %} {% if customer %}
+    {% endif %} {% if shop.customer_accounts_enabled %} {% if customer %}
     <a href="/account">account</a>
     {{ "log out" | customer_logout_link }}
     {% else %}
@@ -58,5 +58,6 @@
     <main role="main">
       {{ content_for_layout }}
     </main>
+    {% if template == 'product' %} {% section 'modal' %} {% endif %}
   </body>
 </html>

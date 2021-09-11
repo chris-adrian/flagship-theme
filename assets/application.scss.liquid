@@ -1,3 +1,135 @@
+/* --- CSS reset START --- */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* --- Common --- */
+.hidden {
+  display: none;
+}
+
+/* --- Cart Page --- */
 #AddToCart:not(:disabled) {
   background-color: green;
   color: black;
@@ -9,4 +141,63 @@
 
 #CrtNtsArea:disabled {
   display: none;
+}
+
+/* --- Modal --- */
+section.modal {
+  // display: none;
+  opacity: 0;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  background: rgb(214, 214, 214);
+  width: calc(100% - 30px);
+  max-width: 600px;
+  border-radius: 8px;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5 ease-in-out;
+}
+
+section.modal.active {
+  opacity: 1;
+}
+
+section.modal .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+section.modal .container > div {
+  padding: 10px;
+  text-align: center;
+  flex: 1;
+}
+
+section.modal .container > div:last-child {
+  text-align: right;
+}
+section.modal .container > div:nth-child(2) {
+  flex: 6;
+}
+
+section.modal .close svg {
+  height: 15px;
+  width: 15px;
+  fill: red;
+}
+
+section.modal .m-cart-img {
+  max-width: 25px;
+  width: 100%;
+  height: auto;
+}
+
+#m-cart-items {
+  max-height: 50px;
+  overflow: auto;
 }
