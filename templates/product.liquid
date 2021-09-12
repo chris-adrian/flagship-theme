@@ -1,7 +1,7 @@
 <div class="row product-page mt-5">
   <div class="col-sm-12 col-md-6">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 text-center">
         {% assign current_variant = product.selected_or_first_available_variant
         %} {% assign featured_image = current_variant.featured_image | default:
         product.featured_image %}
@@ -53,9 +53,7 @@
                 {{ variant.title }} - {{ variant.price | money_with_currency }}
               </option>
               {% else %}
-              <option disabled="disabled">
-                {{ variant.title }} - sold out
-              </option>
+              <option>{{ variant.title }} - sold out</option>
               {% endif %} {% endfor %}
             </select>
           </div>
