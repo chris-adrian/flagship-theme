@@ -7,13 +7,6 @@ function logCart() {
     });
 }
 
-function forceToggle() {
-  const modal = document.getElementsByClassName("modal");
-  modal[0].classList.toggle("active");
-  compStyle = window.getComputedStyle(modal[0]);
-  console.log(compStyle.getPropertyValue("opacity"));
-}
-
 // Input Availability
 function inputAvailability(target, disable) {
   if (disable) {

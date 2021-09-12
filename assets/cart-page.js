@@ -39,6 +39,7 @@ window.onload = () => {
   }
 };
 
+// Remove element attibute
 function removeAttrib(elem, attrib) {
   for (let i = 0; i < elem.length; i++) {
     elem[i].removeAttribute(attrib);
