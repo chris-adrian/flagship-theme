@@ -1,67 +1,118 @@
-{% if cart.item_count > 0 %}
-<h1>cart</h1>
-<form action="/cart" method="post" novalidate id="CartCheckoutForm">
-  <table>
-    <thead>
-      <th colspan="2">Prod</th>
-      <th>Price</th>
-      <th>Qty</th>
-      <th>total</th>
-    </thead>
-    <tbody>
-      {% for item in cart.items %}
-      <tr>
-        <td>
-          <a href="{{ item.url | within: collections.all }}">
-            <img
-              src="{{ item | img_url: 'medium' }}"
-              alt="{{ item.title | escape }}"
-            />
-          </a>
-        </td>
-        <td>
-          <a href="{{ item.url }}">{{ item.product.title }}</a>
-          {{ item.variant.title }}
-          <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"
-            >remove</a
-          >
-        </td>
-        <td>{{ item.price | money }}</td>
-        <td>
-          <input
-            type="number"
-            name="updates[]"
-            id="updates_{{ item.key }}"
-            value="{{ item.quantity }}"
-            min="0"
-          />
-        </td>
-        <td>
-          {% if item.original_line_price != item.line_price %}{{
-            item.original_line_price | money
-          }}{% endif %}
-          {{ item.line_price | money }}
-          {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>
-          <label for="cart-order-notes">Add instructions : </label>
-          <input type="checkbox" name="cart-order-notes" id="CrtNtsBtn" />
-        </td>
-        <td><textarea id="CrtNtsArea" disabled></textarea></td>
-      </tr>
-    </tfoot>
-  </table>
-  <div>
-    <p>sub total : {{ cart.total_price | money }}</p>
-    <input type="submit" name="update" value="Update" />
-    <input type="submit" name="checkout" value="Checkout" />
+<div class="row cart-page mt-5">
+  <div class="col-md-12">
+    <h1 class="h1 text-center">My Cart</h1>
   </div>
-</form>
-{% else %}
-<h2>cart</h2>
-Cart is empty {% endif %}
+  <div class="col-md-12">
+    {% if cart.item_count > 0 %}
+    <form action="/cart" method="post" novalidate id="CartCheckoutForm">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <th colspan="2">Produc(s)</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Option</th>
+          </thead>
+          <tbody>
+            {% for item in cart.items %}
+            <tr>
+              <td>
+                <a href="{{ item.url | within: collections.all }}">
+                  <img
+                    src="{{ item | img_url: 'medium' }}"
+                    alt="{{ item.title | escape }}"
+                  />
+                </a>
+              </td>
+              <td>
+                <h3 class="h3">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h3>
+                <h4 class="h4">{{ item.variant.title }}</h4>
+              </td>
+              <td>
+                <b>{{ item.price | money }}</b>
+              </td>
+              <td>
+                <input
+                  class="form-control"
+                  type="number"
+                  name="updates[]"
+                  id="updates_{{ item.key }}"
+                  value="{{ item.quantity }}"
+                  min="0"
+                />
+              </td>
+              <td>
+                <b>
+                  {% if item.original_line_price != item.line_price %}{{
+                    item.original_line_price | money
+                  }}{% endif %}
+                  {{ item.line_price | money }}
+                  {% for discount in item.discounts %}{{ discount.title }}{%
+                  endfor %}
+                </b>
+              </td>
+              <td>
+                <a
+                  class="btn btn-danger"
+                  href="/cart/change?line={{ forloop.index }}&amp;quantity=0"
+                  >DELETE</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">
+                <div class="form-check">
+                  <label for="cart-order-notes"
+                    ><b>Add instructions : </b></label
+                  >
+                  <input
+                    type="checkbox"
+                    name="cart-order-notes"
+                    id="CrtNtsBtn"
+                  />
+                </div>
+              </td>
+              <td colspan="4">
+                <textarea
+                  id="CrtNtsArea"
+                  class="form-control"
+                  disabled
+                ></textarea>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="row text-right">
+        <div class="col-md-12">
+          <hr />
+          <b class="h3">Sub total : {{ cart.total_price | money }}</b>
+          <hr />
+        </div>
+        <div class="col-md-12">
+          <input
+            class="btn btn-primary"
+            type="submit"
+            name="update"
+            value="UPDATE"
+          />
+          <input
+            class="btn btn-success"
+            type="submit"
+            name="checkout"
+            value="CHECKOUT"
+          />
+        </div>
+      </div>
+    </form>
+    {% else %}
+    <h2 class="h2">Cart is empty</h2>
+    {% endif %}
+  </div>
+</div>

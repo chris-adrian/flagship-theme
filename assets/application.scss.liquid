@@ -125,65 +125,112 @@ table {
 }
 
 /* --- Common --- */
+html,
+body {
+  font-family: "Nunito", sans-serif;
+}
 .hidden {
-  display: none;
+  display: none !important;
 }
+@media (min-width: 768px) {
+  .hidden-md-up {
+    display: none;
+  }
+}
+
+/* --- Navbar --- */
+@media (max-width: 575px) {
+  .navbar-expand-sm .navbar-nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+}
+
+.navbar-nav .nav-link {
+  cursor: pointer;
+}
+
 /* --- Cart Page --- */
-#AddToCart:not(:disabled) {
-  background-color: green;
-  color: black;
-}
-
-#AddToCart:not(:disabled):hover {
-  background-color: blue;
-}
-
 #CrtNtsArea:disabled {
   display: none;
+}
+.cart-page .table img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+}
+.cart-page b {
+  font-weight: bold;
 }
 /* --- Carousel --- */
 #NewsCarousel {
   list-style-type: none;
   margin: 0;
-  padding: 10px;
-  background-color: #f9f9f9;
 }
 #NewsCarousel li {
-  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 6px;
+}
+#NewsCarousel li {
+  background-color: #fbfbfb;
+}
+#NewsCarousel li:nth-child(2n + 1) {
+  background-color: #efefef;
 }
 #NewsCarousel li:hover {
-  background-color: #fdfdfd;
+  background-color: #fff;
 }
-#NewsCarousel li.campaign b {
+#NewsCarousel li.featured {
+  -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.14);
+}
+#NewsCarousel li.non-featured {
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.06);
+}
+#NewsCarousel li.campaign h2 {
   color: red;
 }
-#NewsCarousel li.new-product b {
+#NewsCarousel li.new-product h2 {
   color: blue;
 }
-#NewsCarousel li.news b {
+#NewsCarousel li.news h2 {
   color: green;
 }
 /* --- Modal --- */
 section.modal {
-  // display: none;
+  display: initial;
   opacity: 0;
   position: absolute;
   top: 10px;
   right: 0;
   left: 0;
   margin: auto;
-  background: rgb(214, 214, 214);
+  // background: rgb(214, 214, 214);
   width: calc(100% - 30px);
+  height: auto;
   max-width: 600px;
   border-radius: 8px;
   -webkit-transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
   -o-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5 ease-in-out;
+  -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.14);
 }
 section.modal.active {
   opacity: 1;
 }
+section.modal .modal-content {
+  border: none;
+}
+section.modal .modal-body > .row > div:not(:last-child) {
+  border-right: 1px solid #dee2e6;
+}
+/*
+// Commented - Using Boootstrap Styles
 section.modal .container {
   display: flex;
   justify-content: space-between;
@@ -205,12 +252,80 @@ section.modal .close svg {
   width: 15px;
   fill: red;
 }
+*/
 section.modal .m-cart-img {
   max-width: 25px;
   width: 100%;
   height: auto;
 }
 #m-cart-items {
-  max-height: 50px;
-  overflow: auto;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: clip;
+}
+
+/* --- Product Page --- */
+#AddToCart:not(:disabled) {
+  background-color: green;
+  color: black;
+}
+
+#AddToCart:not(:disabled):hover {
+  background-color: blue;
+}
+
+.product-page img {
+  width: 100%;
+  height: auto;
+}
+.product-page .main-img {
+  max-width: 450px;
+}
+
+.product-page .thumbs-img {
+  max-width: 100px;
+}
+
+.product-page .form-control {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+/* --- Collection Page --- */
+.product-list .list-group-item {
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.06);
+  background-color: #fafafa;
+}
+.product-list .item img {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+}
+
+.product-list h2 + b {
+  font-size: 24px;
+}
+
+/* --- Pagination  --- */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.pagination.center {
+  justify-content: center;
+}
+
+.pagination li {
+  display: inline;
+  margin: 0 5px;
 }

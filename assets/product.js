@@ -66,17 +66,15 @@ function initCartModal(data) {
   mItems.innerHTML = ""; // Clear previous contents
   for (let i = 0; i < data.items.length; i++) {
     let item = data.items[i];
-    mItems.innerHTML += `<li data-cart-index="${
+    mItems.innerHTML += `<a href="${item.url}"><li data-cart-index="${
       item.properties.cart_index
-    }"><a href="${item.url}"><img src="${
+    }"><div class="row"><div class="col-md-4"><img src="${
       item.image
-    }" class="m-cart-img" /><span>${item.title}</span> <span>${priceFormat(
-      item.price,
-      2,
-      2,
-      "jp-JP",
-      "YEN"
-    )} x ${item.quantity}</a></li>`;
+    }" class="m-cart-img" /></div><div class="col-md-8"><span>${
+      item.title
+    }</span> <span>${priceFormat(item.price, 2, 2, "jp-JP", "YEN")} x ${
+      item.quantity
+    }</div></div></li></a>`;
   }
   // Set Modal Quantity
   mQty.innerHTML = data.item_count;

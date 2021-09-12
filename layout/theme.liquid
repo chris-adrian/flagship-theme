@@ -13,6 +13,20 @@
     {{
       content_for_header
     }}
+    <!-- Bootstrap CDN -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <!-- Google Font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap"
+      rel="stylesheet"
+    />
     <!-- Header hook for plugins -->
     {{
       "application.scss.css" | asset_url | stylesheet_tag
@@ -38,29 +52,12 @@
     }}
   </head>
   <body>
-    {% for link in linklists.main-menu.links %} {% assign child_list_handle =
-    link.title | handleize %} {% if linklists[child_list_handle].links != blank
-    %}
-    <a href="{{ link.url }}">{{ link.title }}</a>
-    [{% for childlink in linklists[child_list_handle].links %}
-    <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
-    {% endfor %}] {% else %}
-    <a href="{{ link.url }}">{{ link.title }}</a>
-    {% endif %} {% endfor %} {% if template == 'product' %}
-    <a onclick="showCartModal()">cart</a>
-    {% else %}
-    <a href="/cart">cart</a>
-    {% endif %} {% if shop.customer_accounts_enabled %} {% if customer %}
-    <a href="/account">account</a>
-    {{ "log out" | customer_logout_link }}
-    {% else %}
-    {{ "log in " | customer_login_link }}
-    {{ "register" | customer_register_link }}
-    {% endif %} {% endif %}
-
-    <main role="main">
-      {{ content_for_layout }}
-    </main>
-    {% if template == 'product' %} {% section 'modal' %} {% endif %}
+    {% section 'navigation' %}
+    <div class="container">
+      <main role="main">
+        {{ content_for_layout }}
+      </main>
+      {% if template == 'product' %} {% section 'modal' %} {% endif %}
+    </div>
   </body>
 </html>

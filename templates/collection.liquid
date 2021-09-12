@@ -1,18 +1,38 @@
-{% paginate collection.products by 2 %}
-  <h1>{{ collection.title }}</h1>
-  {% for product in collection.products %}
-    <div>
-      <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-      {{ product.price | money }}
-      {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+<div class="row product-list mt-5">
+  <div class="col-md-12">
+    <h1 class="h1 text-center">{{ collection.title }}</h1>
+  </div>
+  <div class="item col-md-12">
+    {% paginate collection.products by 2 %} {% for product in
+    collection.products %}
+    <ul class="list-group">
       <a href="{{ product.url | within: collection }}">
-        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+        <li class="list-group-item text-center mb-3">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <h2 class="h3 mt-4 mb-3">{{ product.title }}</h2>
+              <b>{{ product.price | money }}</b>
+              {% unless product.available %}<br /><strong>sold out</strong>{%
+              endunless %}
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <img
+                src="{{ product.featured_image.src | img_url: 'large' }}"
+                alt="{{ product.featured_image.alt | escape }}"
+              />
+            </div>
+          </div>
+        </li>
       </a>
+    </ul>
+    {% else %}
+
+    <div class="row">
+      <div class="col-md-12">
+        <p>no matches</p>
+      </div>
     </div>
-  {% else %}
-    <p>no matches</p>
-  {% endfor %}
-  {% if paginate.pages > 1 %}
-    {{ paginate | default_pagination }}
-  {% endif %}
-{% endpaginate %}
+
+    {% endfor %} {% include 'paginate' %} {% endpaginate %}
+  </div>
+</div>

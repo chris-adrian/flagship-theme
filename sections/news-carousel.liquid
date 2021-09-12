@@ -1,74 +1,38 @@
-<h1>News Carousel</h1>
-<ul id="NewsCarousel">
-  <!-- List Featured First -->
-  {% for block in section.blocks %}
-    {% if block.settings.featured %} 
-  <li class="{{block.settings.block_type}}" ><b>{{ block.settings.heading }}</b><br/><small>{{ block.settings.subheading }}</small></li>
-    {% endif %}
-  {% endfor %}
-  <!-- List remaining -->
-  {% for block in section.blocks %}
-    {% if block.settings.featured != true %} 
-      <li class="{{block.settings.block_type}}"><b>{{ block.settings.heading }}</b><br/><small>{{ block.settings.subheading }}</small></li>
-    {% endif %}
-  {% endfor %}
-</ul>
-{% schema %} 
-    { 
-        "name": "News Carousel", 
-        "settings": [ { 
-            "type": "checkbox",
-            "id": "news-carousel", 
-            "label": "Enable Carousel" 
-        } ],
-        "presets": [
-            {
-                "category": "Presets",
-                "name": "News Carousel Preset"
-            }
-        ],
-        "blocks": [
-            {
-            "name": "Content",
-            "type": "content",
-            "settings": [
-                {
-                  "type": "select",
-                  "id": "block_type",
-                  "label": "Type",
-                  "options": [
-                    {
-                      "value": "campaign",
-                      "label": "Campaign"
-                    },
-                    {
-                      "value": "new-product",
-                      "label": "New Product"
-                    },
-                    {
-                      "value": "news",
-                      "label": "News"
-                    }
-                  ],
-                  "default": "campaign"
-                },
-				{
-                    "type": "text",
-                    "label": "Title",
-                    "id": "heading"
-                },
-                {
-                    "type": "textarea",
-                    "label": "Description",
-                    "id": "subheading"
-                },
-                {
-                    "type": "checkbox",
-                    "label": "Featured",
-                    "id": "featured"
-                }
-            ]
-            }
-        ]
-    } 
-{% endschema %}
+<section>
+  <div class="row mt-5 mb-3">
+    <div class="col-md-12 text-center well">
+      <h1 class="h1">News</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul id="NewsCarousel">
+        <!-- List Featured First -->
+        {% for block in section.blocks %} {% if block.settings.featured %}
+        <li class="{{ block.settings.block_type }} mb-3 featured">
+          <h2 class="h3 text-left">{{ block.settings.heading }}</h2>
+          <p class="text-justify">{{ block.settings.subheading }}</p>
+        </li>
+        {% endif %} {% endfor %}
+        <!-- List remaining -->
+        {% for block in section.blocks %} {% if block.settings.featured != true
+        %}
+        <li class="{{ block.settings.block_type }} mb-3 non-featured">
+          <h2 class="h3 text-left">{{ block.settings.heading }}</h2>
+          <p class="text-justify">{{ block.settings.subheading }}</p>
+        </li>
+        {% endif %} {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+{% schema %} { "name": "News Carousel", "settings": [ { "type": "checkbox",
+"id": "news-carousel", "label": "Enable Carousel" } ], "presets": [ {
+"category": "Presets", "name": "News Carousel Preset" } ], "blocks": [ { "name":
+"Content", "type": "content", "settings": [ { "type": "select", "id":
+"block_type", "label": "Type", "options": [ { "value": "campaign", "label":
+"Campaign" }, { "value": "new-product", "label": "New Product" }, { "value":
+"news", "label": "News" } ], "default": "campaign" }, { "type": "text", "label":
+"Title", "id": "heading" }, { "type": "textarea", "label": "Description", "id":
+"subheading" }, { "type": "checkbox", "label": "Featured", "id": "featured" } ]
+} ] } {% endschema %}
