@@ -226,8 +226,13 @@ section.modal.active {
 section.modal .modal-content {
   border: none;
 }
-section.modal .modal-body > .row > div:not(:last-child) {
-  border-right: 1px solid #dee2e6;
+section.modal span {
+  font-weight: bold;
+}
+@media (min-width: 768px) {
+  section.modal .modal-body > .row > div:not(:last-child) {
+    border-right: 1px solid #dee2e6;
+  }
 }
 /*
 // Commented - Using Boootstrap Styles

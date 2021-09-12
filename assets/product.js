@@ -68,7 +68,7 @@ function initCartModal(data) {
     let item = data.items[i];
     mItems.innerHTML += `<a href="${item.url}"><li data-cart-index="${
       item.properties.cart_index
-    }"><div class="row"><div class="col-md-4"><img src="${
+    }"><div class="row mb-2"><div class="col-md-4"><img src="${
       item.image
     }" class="m-cart-img" /></div><div class="col-md-8"><span>${
       item.title
