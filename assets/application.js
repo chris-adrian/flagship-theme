@@ -7,7 +7,7 @@ const preset_prdID = "";
 const preset_metaID = "";
 
 // TASK D function - (shop_url/admin/bulk?resource_name=Product&edit=metafields.global.test)
-function testIncreament(prdID) {
+function createOrIncrement(prdID) {
   let newMeta = true;
   getMetaField(prdID).then((data) => {
     data.metafields.forEach((meta) => {
