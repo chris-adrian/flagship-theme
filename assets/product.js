@@ -148,7 +148,19 @@ function pushToCart() {
       })
         .then((response) => response.json())
         .then((data) => {
-          // console.log("Success:", data);
+          const cartModalMsg = document.getElementById("m-cart-msg");
+          cartModalMsg.classList.remove("success");
+          cartModalMsg.classList.remove("error");
+
+          if (data.status) {
+            if (data.status == 422) {
+              cartModalMsg.classList.add("error");
+              cartModalMsg.innerHTML = data.description;
+            }
+          } else {
+            cartModalMsg.classList.add("success");
+            cartModalMsg.innerHTML = "Item(s) added to cart successfully.";
+          }
           fetchCart();
         })
         .catch((error) => {

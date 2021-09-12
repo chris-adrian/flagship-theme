@@ -9,7 +9,9 @@
 
     <div class="modal-body text-center">
       <div class="row">
-        <div class="col-md-2">In stock:<br /><span id="m-prdQty"></span></div>
+        <div class="col-md-2">
+          In stock:<br /><br /><span id="m-prdQty"></span>
+        </div>
         <div class="col-md-6">
           <hr class="hidden-md-up" />
           <a href="/cart">Items</a>
@@ -18,13 +20,16 @@
         </div>
         <div class="col-md-2">
           <hr class="hidden-md-up" />
-          Total Qty:<br /><span id="m-cart-qty"></span>
+          Total Qty:<br /><br /><span id="m-cart-qty"></span>
         </div>
         <div class="col-md-2">
           <hr class="hidden-md-up" />
-          Sub Total:<br />&#165;<span id="m-cart-total"></span>
+          Sub Total:<br /><br />&#165;<span id="m-cart-total"></span>
         </div>
       </div>
+    </div>
+    <div class="modal-footer">
+      <span id="m-cart-msg"></span>
     </div>
     {% comment %}
     <div class="close">
