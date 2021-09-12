@@ -117,6 +117,15 @@ function pushToCart() {
   fetch("/cart.js")
     .then((response) => response.json())
     .then((data) => {
+      // Get Current Cart Index
+      let currentIndex = 0;
+      if (data.items.length > 0) {
+        for (let x = 0; x < data.items.length; x++) {
+          const item = data.items[x];
+          item.properties.cart_index >= currentIndex &&
+            (currentIndex = item.properties.cart_index + 1);
+        }
+      }
       // Build Item
       let item = {
         items: [
@@ -124,7 +133,7 @@ function pushToCart() {
             id: prodID.value,
             quantity: prodQty.value,
             properties: {
-              cart_index: data.items.length,
+              cart_index: currentIndex,
             },
           },
         ],
