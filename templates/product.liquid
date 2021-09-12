@@ -31,7 +31,8 @@ product.featured_image %}
       {{ variant.title }} - {{ variant.price | money_with_currency }}
     </option>
     {% else %}
-    <option disabled="disabled">{{ variant.title }} - sold out</option>
+    <!-- disabled="disabled" -->
+    <option>{{ variant.title }} - sold out</option>
     {% endif %} {% endfor %}
   </select>
   {{ current_variant.price | money }}

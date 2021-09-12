@@ -40,9 +40,9 @@ function toggleModal(ele, close = false) {
 
 // Set Add to Cart Button and Modal stock QTY
 function setPrdCartBtn(select, btn) {
-  const qty =
-    select.options[select.selectedIndex].getAttribute("data-quantity");
+  let qty = select.options[select.selectedIndex].getAttribute("data-quantity");
   const modal = document.getElementById("m-prdQty");
+  qty = qty > 0 ? qty : 0;
   if (modal) modal.innerHTML = qty;
   qty <= 0 ? inputAvailability(btn, true) : inputAvailability(btn, false);
 }
